@@ -35,5 +35,12 @@ void Graph::printGraph(){
     std::cout << "Graph with "<<numVertices<<" vertices and "<<edges<<" edges." << std::endl;
 }
 
+std::vector<std::vector<int>>& operator+(Graph g1, Graph g2) {
+    if (i >= numVertices) {
+        throw std::out_of_range("Index out of bounds");
+    }
+    return adjMatrix[i];
+}
+
 
 
