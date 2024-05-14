@@ -25,19 +25,12 @@ namespace ariel {
             this->numVertices = Mat.size();
         }
 
-       std::vector<int>& operator[](size_t i) {
-            if (i >= numVertices) {
-                throw std::out_of_range("Index out of bounds");
-            }
-            return adjMatrix[i];
-        }
-
-        const std::vector<int>& operator[](size_t i) const {
-            if (i >= numVertices) {
-                throw std::out_of_range("Index out of bounds");
-            }
-            return adjMatrix[i];
-        }
+        friend std::vector<std::vector<int>>& operator+(Graph g1, Graph g2); // plus operator
+        friend std::vector<std::vector<int>>& operator=+(Graph g1, Graph g2); // addition operator
+        friend std::vector<std::vector<int>>& operator+(Graph g); // Unary plus operator
+        friend std::vector<std::vector<int>>& operator-(Graph g1, Graph g2); // matrix subtraction operator
+        friend std::vector<std::vector<int>>& operator=-(Graph g1, Graph g2); // subtraction operator
+        friend std::vector<std::vector<int>>& operator-(Graph g); // Unary minus operator
 
         int getNumVertices() const;
         std::vector<std::vector<int>> getAdjMatrix() const;
