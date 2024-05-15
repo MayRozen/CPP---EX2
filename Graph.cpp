@@ -35,11 +35,119 @@ void Graph::printGraph(){
     std::cout << "Graph with "<<numVertices<<" vertices and "<<edges<<" edges." << std::endl;
 }
 
-std::vector<std::vector<int>>& operator+(Graph g1, Graph g2) {
-    if (i >= numVertices) {
-        throw std::out_of_range("Index out of bounds");
+Graph& operator+(Graph g1, Graph g2) {
+    if (g1.getNumVertices() != g2.getNumVertices()) {
+        throw std::out_of_range("Error! The matrix are not of the same order of magnitude.");
     }
-    return adjMatrix[i];
+
+    Graph ans;
+    std::vector<std::vector<int>> ansMat;
+    std::vector<std::vector<int>> g1Mat = g1.getAdjMatrix();
+    std::vector<std::vector<int>> g2Mat = g2.getAdjMatrix();
+    int n = g1.getNumVertices();
+
+    for(int i=0; i<n; i++){
+        for(int j=0; j<n; j++){
+            ansMat[i][j] = g1Mat[i][j] + g2Mat[i][j];
+        }
+    } 
+
+    ans.loadGraph(ansMat);
+    return ans;
+}
+
+Graph& operator+=(Graph g1, Graph g2){ // addition operator
+    if (g1.getNumVertices() != g2.getNumVertices()) {
+        throw std::out_of_range("Error! The matrix are not of the same order of magnitude.");
+    }
+
+    Graph ans;
+    std::vector<std::vector<int>> ansMat;
+    std::vector<std::vector<int>> g1Mat = g1.getAdjMatrix();
+    std::vector<std::vector<int>> g2Mat = g2.getAdjMatrix();
+    int n = g1.getNumVertices();
+
+    for(int i=0; i<n; i++){
+        for(int j=0; j<n; j++){
+            ansMat[i][j] = g1Mat[i][j] + g2Mat[i][j];
+        }
+    } 
+
+    ans.loadGraph(ansMat);
+    return ans;
+}
+
+Graph& operator+(Graph g, int c){ // Unary plus operator
+    Graph ans;
+    std::vector<std::vector<int>> ansMat;
+    std::vector<std::vector<int>> gMat = g.getAdjMatrix();
+    int n = g.getNumVertices();
+
+    for(int i=0; i<n; i++){
+        for(int j=0; j<n; j++){
+            ansMat[i][j] = gMat[i][j] + c;
+        }
+    } 
+
+    ans.loadGraph(ansMat);
+    return ans;
+
+}
+Graph& operator-(Graph g1, Graph g2){ // matrix subtraction operator
+    if (g1.getNumVertices() != g2.getNumVertices()) {
+        throw std::out_of_range("Error! The matrix are not of the same order of magnitude.");
+    }
+
+    Graph ans;
+    std::vector<std::vector<int>> ansMat;
+    std::vector<std::vector<int>> g1Mat = g1.getAdjMatrix();
+    std::vector<std::vector<int>> g2Mat = g2.getAdjMatrix();
+    int n = g1.getNumVertices();
+
+    for(int i=0; i<n; i++){
+        for(int j=0; j<n; j++){
+            ansMat[i][j] = g1Mat[i][j] - g2Mat[i][j];
+        }
+    } 
+
+    ans.loadGraph(ansMat);
+    return ans;
+} 
+Graph& operator-=(Graph g1, Graph g2){ // subtraction operator
+    if (g1.getNumVertices() != g2.getNumVertices()) {
+        throw std::out_of_range("Error! The matrix are not of the same order of magnitude.");
+    }
+
+    Graph ans;
+    std::vector<std::vector<int>> ansMat;
+    std::vector<std::vector<int>> g1Mat = g1.getAdjMatrix();
+    std::vector<std::vector<int>> g2Mat = g2.getAdjMatrix();
+    int n = g1.getNumVertices();
+
+    for(int i=0; i<n; i++){
+        for(int j=0; j<n; j++){
+            ansMat[i][j] = g1Mat[i][j] - g2Mat[i][j];
+        }
+    } 
+
+    ans.loadGraph(ansMat);
+    return ans;
+}
+
+Graph& operator-(Graph g, int c){ // Unary minus operator
+    Graph ans;
+    std::vector<std::vector<int>> ansMat;
+    std::vector<std::vector<int>> gMat = g.getAdjMatrix();
+    int n = g.getNumVertices();
+
+    for(int i=0; i<n; i++){
+        for(int j=0; j<n; j++){
+            ansMat[i][j] = gMat[i][j] - c;
+        }
+    } 
+
+    ans.loadGraph(ansMat);
+    return ans;
 }
 
 
