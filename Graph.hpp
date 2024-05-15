@@ -34,17 +34,22 @@ namespace ariel {
 
         friend Graph& operator+(Graph g1, Graph g2); // plus operator
         friend Graph& operator+=(Graph g1, Graph g2); // addition operator
-        friend Graph& operator+(Graph g, int c); // Unary plus operator
+        friend Graph& operator+(Graph g); // Unary plus operator
         friend Graph& operator-(Graph g1, Graph g2); // matrix subtraction operator
         friend Graph& operator-=(Graph g1, Graph g2); // subtraction operator
-        friend Graph& operator-(Graph g, int c); // Unary minus operator
+        friend Graph& operator-(Graph g); // Unary minus operator
 
-        friend Graph& operator>(Graph g1, Graph g2); // Unary minus operator
-        friend Graph& operator>=(Graph g1, Graph g2); // Unary minus operator
-        friend Graph& operator<(Graph g1, Graph g2); // Unary minus operator
-        friend Graph& operator<=(Graph g1, Graph g2); // Unary minus operator
-        friend Graph& operator==(Graph g1, Graph g2); // Unary minus operator
-        friend Graph& operator!=(Graph g1, Graph g2); // Unary minus operator
+        friend bool operator>(Graph g1, Graph g2);
+        friend bool operator>=(Graph g1, Graph g2);
+        friend bool operator<(Graph g1, Graph g2);
+        friend bool operator<=(Graph g1, Graph g2);
+        friend bool operator==(Graph g1, Graph g2);
+        friend bool operator!=(Graph g1, Graph g2);
+
+        friend Graph& operator++(Graph &g); //++n
+        friend Graph& operator++(Graph &g, int); // n++
+        friend Graph& operator--(Graph &g); //--n
+        friend Graph& operator--(Graph &g, int); // n--
     };
 }
 
