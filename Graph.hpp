@@ -25,17 +25,26 @@ namespace ariel {
             this->numVertices = Mat.size();
         }
 
-        friend std::vector<std::vector<int>>& operator+(Graph g1, Graph g2); // plus operator
-        friend std::vector<std::vector<int>>& operator=+(Graph g1, Graph g2); // addition operator
-        friend std::vector<std::vector<int>>& operator+(Graph g); // Unary plus operator
-        friend std::vector<std::vector<int>>& operator-(Graph g1, Graph g2); // matrix subtraction operator
-        friend std::vector<std::vector<int>>& operator=-(Graph g1, Graph g2); // subtraction operator
-        friend std::vector<std::vector<int>>& operator-(Graph g); // Unary minus operator
-
         int getNumVertices() const;
         std::vector<std::vector<int>> getAdjMatrix() const;
         void loadGraph(const std::vector<std::vector<int>>& adjMat);
         void printGraph();
+
+//---------------------------operators---------------------------
+
+        friend Graph& operator+(Graph g1, Graph g2); // plus operator
+        friend Graph& operator+=(Graph g1, Graph g2); // addition operator
+        friend Graph& operator+(Graph g, int c); // Unary plus operator
+        friend Graph& operator-(Graph g1, Graph g2); // matrix subtraction operator
+        friend Graph& operator-=(Graph g1, Graph g2); // subtraction operator
+        friend Graph& operator-(Graph g, int c); // Unary minus operator
+
+        friend Graph& operator>(Graph g1, Graph g2); // Unary minus operator
+        friend Graph& operator>=(Graph g1, Graph g2); // Unary minus operator
+        friend Graph& operator<(Graph g1, Graph g2); // Unary minus operator
+        friend Graph& operator<=(Graph g1, Graph g2); // Unary minus operator
+        friend Graph& operator==(Graph g1, Graph g2); // Unary minus operator
+        friend Graph& operator!=(Graph g1, Graph g2); // Unary minus operator
     };
 }
 
