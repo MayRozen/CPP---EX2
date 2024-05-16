@@ -24,6 +24,18 @@ namespace ariel {
         Graph(const std::vector<std::vector<int>>& Mat) : adjMatrix(Mat) {
             this->numVertices = Mat.size();
         }
+        
+        // Copy constructor
+        Graph(const Graph& other) : numVertices(other.numVertices), adjMatrix(other.adjMatrix){
+            numVertices = other.numVertices;
+        
+            // Deep copy the adjacency matrix
+            adjMatrix.resize(other.adjMatrix.size());
+            for (size_t i = 0; i < other.adjMatrix.size(); ++i) {
+                adjMatrix[i] = other.adjMatrix[i];
+            }
+        }
+        // Additional deep copy logic if necessary
 
         int getNumVertices() const;
         std::vector<std::vector<int>> getAdjMatrix() const;
@@ -47,9 +59,9 @@ namespace ariel {
         friend bool operator!=(Graph g1, Graph g2);
 
         friend Graph& operator++(Graph &g); //++n
-        friend Graph& operator++(Graph &g, int); // n++
+        friend const Graph& operator++(Graph &g, int); // n++
         friend Graph& operator--(Graph &g); //--n
-        friend Graph& operator--(Graph &g, int); // n--
+        friend const Graph& operator--(Graph &g, int); // n--
     };
 }
 
