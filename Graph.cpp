@@ -222,8 +222,16 @@ Graph& operator++(Graph &g){ //++n
     return g; 
 }
 
-Graph& operator++(Graph &g, int){ // n++
-    int n = g.getNumVertices();
+const Graph& operator++(Graph &g, int){ // n++
+    Graph cpy(*this); // Calling copy constructor
+    int n = cpy.getNumVertices();
+
+    for(int i=0; i<n; i++){
+        for(int j=0; j<n; j++){
+            cpy.getAdjMatrix()[i][j]++;
+        }
+    }
+    return cpy;
 }
 
 Graph& operator--(Graph &g){ //--n
@@ -237,8 +245,16 @@ Graph& operator--(Graph &g){ //--n
     return g; 
 }
 
-Graph& operator--(Graph &g, int){
-    int n = g.getNumVertices();
+const Graph& operator--(Graph &g, int){
+    Graph cpy(*this); // Calling copy constructor
+    int n = cpy.getNumVertices();
+
+    for(int i=0; i<n; i++){
+        for(int j=0; j<n; j++){
+            cpy.getAdjMatrix()[i][j]--;
+        }
+    }
+    return cpy;
 }
 
 
