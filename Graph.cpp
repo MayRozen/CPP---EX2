@@ -158,23 +158,24 @@ Graph& operator-(Graph g){ // Unary minus operator
 
 //---------------------------Comparison Operators---------------------------
 
-bool operator>(Graph g1, Graph g2){
+bool operator>(const Graph& g1, const Graph& g2){ // g1>g2
     
 }
 
-bool operator>=(Graph g1, Graph g2){
+bool operator>=(const Graph& g1, const Graph& g2){ // g1<=g2
 
 }
 
-bool operator<(Graph g1, Graph g2){
+bool operator<(const Graph& g1,const Graph& g2){ // g2>g1
+ if(isSubMatrix(g2,g1))
 
 }
 
-bool operator<=(Graph g1, Graph g2){
+bool operator<=(const Graph& g1, const Graph& g2){ // g1<=g2
 
 }
 
-bool operator==(Graph g1, Graph g2){
+bool operator==(const Graph& g1, const Graph& g2){ // g1==g2
     if (g1.getNumVertices() != g2.getNumVertices()) {
         throw std::out_of_range("Error! The matrix are not of the same order of magnitude.");
         return false;
@@ -202,12 +203,40 @@ bool operator==(Graph g1, Graph g2){
 
 }
 
-bool operator!=(Graph g1, Graph g2){
+bool operator!=(const Graph& g1, const Graph& g2){ // g1!=g2
     if(!(g1==g2)){
         return true; // If the graphs are not equals so "!=" return true
     }
     return false;
 }
+
+// Auxiliary function for finding if smallMatrix is a sub-matrix of bigMatrix
+bool isSubMatrix(const std::vector<std::vector<int>>& bigMatrix, const std::vector<std::vector<int>>& smallMatrix) {
+    int bigRows = bigMatrix.size();
+    int bigCols = bigMatrix[0].size();
+    int smallRows = smallMatrix.size();
+    int smallCols = smallMatrix[0].size();
+
+    // Iterate over each element in the big matrix
+    for (int i = 0; i <= bigRows - smallRows; ++i) {
+        for (int j = 0; j <= bigCols - smallCols; ++j) {
+            // Check if the small matrix is contained within the big matrix at the current position
+            bool isMatch = true;
+            for (int k = 0; k < smallRows; ++k) {
+                for (int l = 0; l < smallCols; ++l) {
+                    if (bigMatrix[i + k][j + l] != smallMatrix[k][l]) {
+                        isMatch = false;
+                        break;
+                    }
+                }
+                if (!isMatch) break;
+            }
+            if (isMatch) return true;
+        }
+    }
+    return false;
+}
+
 
 //---------------------------Increase and Decrease with 1---------------------------
 
@@ -256,5 +285,60 @@ const Graph& operator--(Graph &g, int){
     }
     return cpy;
 }
+
+//---------------------------Multiplication by a scalar---------------------------
+
+Graph& operator*(Graph g, int c){ 
+    Graph ans;
+    std::vector<std::vector<int>> ansMat;
+    std::vector<std::vector<int>> gMat = g.getAdjMatrix();
+    int n = g.getNumVertices();
+
+    for(int i=0; i<n; i++){
+        for(int j=0; j<n; j++){
+            ansMat[i][j] = gMat[i][j]*c;
+        }
+    } 
+
+    ans.loadGraph(ansMat);
+    return ans;
+}
+
+//---------------------------Graph Multiplication---------------------------
+// Function to display a matrix
+void displayMatrix(const std::vector<std::vector<int>>& g) {
+    for (const auto& row : g) {
+        for (int val : row) {
+            std::cout << val << " ";
+        }
+        std::cout << std::endl;
+    }
+}
+
+Graph& operator*(Graph g1, Graph g2){ 
+    Graph ans;
+    std::vector<std::vector<int>> ansMat;
+    int sizeG1 = g1.getNumVertices();
+    int sizeG2 = g2.getNumVertices();
+
+    // Check if matrices can be multiplied
+    if (sizeG1 != sizeG2) {
+        std::cout << "Matrices cannot be multiplied!" << std::endl;
+        return;
+    }
+
+    // Multiply matrices
+    for (int i = 0; i < sizeG1; ++i) {
+        for (int j = 0; j < sizeG2; ++j) {
+            for (int k = 0; k < sizeG1; ++k) {
+                ansMat[i][j] += g1.getAdjMatrix()[i][k] * g2.getAdjMatrix()[k][j];
+            }
+        }
+    }
+    ans.loadGraph(ansMat);
+
+    return ans;
+}
+
 
 
