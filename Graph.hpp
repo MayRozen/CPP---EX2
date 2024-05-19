@@ -51,17 +51,23 @@ namespace ariel {
         friend Graph& operator-=(Graph g1, Graph g2); // subtraction operator
         friend Graph& operator-(Graph g); // Unary minus operator
 
-        friend bool operator>(Graph g1, Graph g2);
-        friend bool operator>=(Graph g1, Graph g2);
-        friend bool operator<(Graph g1, Graph g2);
-        friend bool operator<=(Graph g1, Graph g2);
-        friend bool operator==(Graph g1, Graph g2);
-        friend bool operator!=(Graph g1, Graph g2);
+        friend bool operator>(const Graph& g1, const Graph& g2);
+        friend bool operator>=(const Graph& g1, const Graph& g2);
+        friend bool operator<(const Graph& g1, const Graph& g2);
+        friend bool operator<=(const Graph& g1, const Graph& g2);
+        friend bool operator==(const Graph& g1, const Graph& g2);
+        friend bool operator!=(const Graph& g1, const Graph& g2);
 
         friend Graph& operator++(Graph &g); //++n
         friend const Graph& operator++(Graph &g, int); // n++
         friend Graph& operator--(Graph &g); //--n
         friend const Graph& operator--(Graph &g, int); // n--
+
+        friend Graph& operator*(Graph g, int c); // Multiplication by a scalar
+
+        friend Graph& operator*(Graph g1, Graph g2); // Graph Multiplication
+
+        friend Graph& operator<<(std::ostream &os, Graph g1); // Print Graph
     };
 }
 
