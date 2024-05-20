@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <vector>
+#include <string>
 
 namespace ariel {
     using IndexType = typename std::vector<int>::size_type; // Define a type alias for vector index type
@@ -36,7 +37,7 @@ namespace ariel {
         int getNumVertices() const;
         std::vector<std::vector<int>> getAdjMatrix() const;
         void loadGraph(const std::vector<std::vector<int>>& adjMat);
-        void printGraph();
+        std::string printGraph();
 
         // Overload subscript operator to access elements of adjacency matrix
         const std::vector<int>& operator[](size_t index) const {
