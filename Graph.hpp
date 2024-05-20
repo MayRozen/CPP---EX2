@@ -67,7 +67,7 @@ namespace ariel {
 
         friend Graph& operator*(Graph g1, Graph g2); // Graph Multiplication
 
-        friend Graph& operator<<(std::ostream &os, Graph g1); // Print Graph
+        friend Graph& operator<<(std::ostream &os, Graph g); // Print Graph
     };
 }
 
