@@ -187,7 +187,7 @@ namespace ariel{
 
                 for(size_t k=0; k<n2; k++){ // The smaller graph
                     for(size_t m=0; m<n2; m++){
-                        if(g1Mat[i+k][j+m]!=g2Mat[k][m]){
+                        if(((i+k)<n1)&&((j+m)<n1)&&(g1Mat[i+k][j+m]!=g2Mat[k][m])){
                             return false;
                         }
                         else{
