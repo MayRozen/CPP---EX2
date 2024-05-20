@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <vector>
+#include <string>
 #include "Graph.hpp"
 
 namespace ariel{
@@ -23,16 +24,21 @@ namespace ariel{
         this->numVertices = adjMat.size();
     }
 
-    void Graph::printGraph(){
+    std::string Graph::printGraph(){
         int edges = 0;
+        std::string ans = "[";
         for (IndexType i = 0; i < numVertices; i++) {
             for (IndexType j = 0; j < numVertices; j++) {
+                ans = ans +","+ std::to_string(adjMatrix[i][j]);
                 if(adjMatrix[i][j]!=0){ // Assuming the lack of an edge is expressed by 0
                     edges++;
                 }
             }
+            ans = ans + "]";
         }
-        std::cout << "Graph with "<<numVertices<<" vertices and "<<edges<<" edges." << std::endl;
+
+        std::cout << "Graph with " <<numVertices<<" vertices and "<<edges<<" edges." << std::endl;
+        return ans;
     }
 
     // Copy constructor
