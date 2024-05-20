@@ -159,20 +159,53 @@ Graph& operator-(Graph g){ // Unary minus operator
 //---------------------------Comparison Operators---------------------------
 
 bool operator>(const Graph& g1, const Graph& g2){ // g1>g2
-    
+    std::vector<std::vector<int>> g1Mat = g1.getAdjMatrix();
+    std::vector<std::vector<int>> g2Mat = g2.getAdjMatrix();
+    int n1 = g1.getNumVertices();
+    int n2 = g2.getNumVertices(); // The smaller graph
+
+    if(n2>n1){
+        return false;
+    }
+
+    for(int i=0; i<n1; i++){ // The bigger graph
+        for(int j=0; j<n1; j++){
+
+            for(int k=0; k<n2; k++){ // The smaller graph
+                for(int m=0; m<n2; m++){
+                    if(g1Mat[i+k][j+m]!=g2Mat[k][m]){
+                        return false;
+                    }
+                    else{
+                        continue;
+                    }
+                }
+            }   
+        }
+    }
+
+    return false;
 }
 
 bool operator>=(const Graph& g1, const Graph& g2){ // g1<=g2
-
+    if((g2 > g1) && (g1.getNumVertices()==g2.getNumVertices())){
+        return true;
+    }
+    return false;
 }
 
 bool operator<(const Graph& g1,const Graph& g2){ // g2>g1
- if(isSubMatrix(g2,g1))
-
+    if(g2 > g1){
+        return true;
+    }
+    return false;
 }
 
 bool operator<=(const Graph& g1, const Graph& g2){ // g1<=g2
-
+    if((g2 < g1) && (g1.getNumVertices()==g2.getNumVertices())){
+        return true;
+    }
+    return false;
 }
 
 bool operator==(const Graph& g1, const Graph& g2){ // g1==g2
@@ -206,33 +239,6 @@ bool operator==(const Graph& g1, const Graph& g2){ // g1==g2
 bool operator!=(const Graph& g1, const Graph& g2){ // g1!=g2
     if(!(g1==g2)){
         return true; // If the graphs are not equals so "!=" return true
-    }
-    return false;
-}
-
-// Auxiliary function for finding if smallMatrix is a sub-matrix of bigMatrix
-bool isSubMatrix(const std::vector<std::vector<int>>& bigMatrix, const std::vector<std::vector<int>>& smallMatrix) {
-    int bigRows = bigMatrix.size();
-    int bigCols = bigMatrix[0].size();
-    int smallRows = smallMatrix.size();
-    int smallCols = smallMatrix[0].size();
-
-    // Iterate over each element in the big matrix
-    for (int i = 0; i <= bigRows - smallRows; ++i) {
-        for (int j = 0; j <= bigCols - smallCols; ++j) {
-            // Check if the small matrix is contained within the big matrix at the current position
-            bool isMatch = true;
-            for (int k = 0; k < smallRows; ++k) {
-                for (int l = 0; l < smallCols; ++l) {
-                    if (bigMatrix[i + k][j + l] != smallMatrix[k][l]) {
-                        isMatch = false;
-                        break;
-                    }
-                }
-                if (!isMatch) break;
-            }
-            if (isMatch) return true;
-        }
     }
     return false;
 }
@@ -330,14 +336,31 @@ Graph& operator*(Graph g1, Graph g2){
     // Multiply matrices
     for (int i = 0; i < sizeG1; ++i) {
         for (int j = 0; j < sizeG2; ++j) {
-            for (int k = 0; k < sizeG1; ++k) {
-                ansMat[i][j] += g1.getAdjMatrix()[i][k] * g2.getAdjMatrix()[k][j];
+            if(i == j){
+                ansMat[i][j] = 0;
+            }
+            else{
+                for (int k = 0; k < sizeG1; ++k) {
+                    ansMat[i][j] += g1.getAdjMatrix()[i][k] * g2.getAdjMatrix()[k][j];
+                }
             }
         }
     }
     ans.loadGraph(ansMat);
 
     return ans;
+}
+
+
+//---------------------------Graph Multiplication---------------------------
+Graph& operator<<(std::ostream &os, Graph g){
+    int n = g.getNumVertices();
+
+    for(int i=0; i<n; i++){
+        for(int j=0; j<n; j++){
+            std::cout << g.getAdjMatrix()[i][j];
+        }
+    }
 }
 
 
