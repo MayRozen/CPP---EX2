@@ -16,31 +16,36 @@ namespace ariel {
         std::vector<std::vector<int>> adjMatrix;
 
     public:
+
         // Constructor taking the number of vertices
         Graph() : numVertices(), adjMatrix(0, std::vector<int>(0, 0)) {} // empty graph
 
-        // Constructor taking the adjacency matrix
+        // // Destructor
+        // ~Graph() {}
+
         // Constructor taking the adjacency matrix
         Graph(const std::vector<std::vector<int>>& Mat) : adjMatrix(Mat) {
             this->numVertices = Mat.size();
         }
+
+        // Graph(const Graph& other) : numVertices(other.numVertices), adjMatrix(other.adjMatrix) {}
         
-        // Copy constructor
-        Graph(const Graph& other) : numVertices(other.numVertices), adjMatrix(other.adjMatrix){
-            numVertices = other.numVertices;
-        
-            // Deep copy the adjacency matrix
-            adjMatrix.resize(other.adjMatrix.size());
-            for (size_t i = 0; i < other.adjMatrix.size(); ++i) {
-                adjMatrix[i] = other.adjMatrix[i];
-            }
-        }
-        // Additional deep copy logic if necessary
+        // Declaration of the copy constructor
+        Graph(const Graph& other);
 
         int getNumVertices() const;
         std::vector<std::vector<int>> getAdjMatrix() const;
         void loadGraph(const std::vector<std::vector<int>>& adjMat);
         void printGraph();
+
+        // Overload subscript operator to access elements of adjacency matrix
+        const std::vector<int>& operator[](size_t index) const {
+            return adjMatrix[index];
+        }
+
+        std::vector<int>& operator[](size_t index) {
+            return adjMatrix[index];
+        }
 
 //---------------------------operators---------------------------
 
@@ -59,11 +64,13 @@ namespace ariel {
         friend bool operator!=(const Graph& g1, const Graph& g2);
 
         friend Graph& operator++(Graph &g); //++n
-        friend Graph operator++(Graph &g, int); // n++
+        friend const Graph operator++(Graph &g, int); // n++
         friend Graph& operator--(Graph &g); //--n
-        friend Graph operator--(Graph &g, int); // n--
+        friend const Graph operator--(Graph &g, int); // n--
 
         friend Graph operator*(const Graph& g, int c); // Multiplication by a scalar
+        friend void operator*=(Graph &g, int c); // Multiply the graph by int
+        friend void operator/=(Graph &g, int c); // Dividing the graph by int
 
         friend Graph operator*(const Graph& g1, const Graph& g2); // Graph Multiplication
 
