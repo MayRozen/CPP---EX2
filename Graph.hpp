@@ -18,21 +18,19 @@ namespace ariel {
 
     public:
 
-        // Constructor taking the number of vertices
-        Graph() : numVertices(), adjMatrix(0, std::vector<int>(0, 0)) {} // empty graph
-
-        // // Destructor
-        // ~Graph() {}
-
-        // Constructor taking the adjacency matrix
-        Graph(const std::vector<std::vector<int>>& Mat) : adjMatrix(Mat) {
-            this->numVertices = Mat.size();
+        Graph(){
+            this->numVertices = 0;
         }
+        // Constructor taking the adjacency matrix
+        Graph(const std::vector<std::vector<int>>& Mat) : numVertices(Mat.size()), adjMatrix(Mat) {}
 
-        // Graph(const Graph& other) : numVertices(other.numVertices), adjMatrix(other.adjMatrix) {}
-        
-        // Declaration of the copy constructor
+        // Copy constructor
         Graph(const Graph& other);
+
+        // Destructor
+        ~Graph(){
+            this->adjMatrix.clear();
+        }
 
         int getNumVertices() const;
         std::vector<std::vector<int>> getAdjMatrix() const;
@@ -69,7 +67,7 @@ namespace ariel {
         friend Graph& operator--(Graph &g); //--n
         friend const Graph operator--(Graph &g, int); // n--
 
-        friend Graph operator*(const Graph& g, int c); // Multiplication by a scalar
+        friend void operator*(Graph& g, int c); // Multiplication by a scalar
         friend void operator*=(Graph &g, int c); // Multiply the graph by int
         friend void operator/=(Graph &g, int c); // Dividing the graph by int
 
