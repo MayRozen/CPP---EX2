@@ -190,22 +190,31 @@ namespace ariel{
     //---------------------------Comparison Operators---------------------------
 
     bool operator>(Graph g1, Graph g2) { // g1>g2
+        bool ans = true;
         std::vector<std::vector<int>> g1Mat = g1.getAdjMatrix();
         std::vector<std::vector<int>> g2Mat = g2.getAdjMatrix();
         int n1 = g1.getNumVertices();
         int n2 = g2.getNumVertices(); // The smaller graph
 
+        int numG1 = 0, numG2 = 0; // The amount of the edges
+
         if(n2>n1){
-            return false;
+            ans = false;
         }
 
         for(size_t i=0; i<n1; i++){ // The bigger graph
             for(size_t j=0; j<n1; j++){
+                if(g1Mat[i][j]!=0){ // The amount of the edges of g1 
+                    numG1++;
+                }
 
                 for(size_t k=0; k<n2; k++){ // The smaller graph
                     for(size_t m=0; m<n2; m++){
+                        if(g2Mat[k][m]!=0){ // The amount of the edges of g2
+                            numG2++;
+                        }
                         if(((i+k)<n1)&&((j+m)<n1)&&(g1Mat[i+k][j+m]!=g2Mat[k][m])){
-                            return false;
+                            ans = false;
                         }
                         else{
                             continue;
@@ -215,7 +224,11 @@ namespace ariel{
             }
         }
 
-        return false;
+        if(ans==false && numG1>=numG2){
+            ans = true;
+        }
+
+        return ans;
     }
 
     bool operator>=(Graph g1, Graph g2){ // g1<=g2
