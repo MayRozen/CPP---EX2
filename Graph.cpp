@@ -111,8 +111,11 @@ namespace ariel{
 
         for(size_t i=0; i<n; i++){
             for(size_t j=0; j<n; j++){
-                if(gMat[i][j]<0){
-                    ansMat[i][j] = gMat[i][j]*(+1);
+                if(gMat[i][j]>=0){
+                    ansMat[i][j] = gMat[i][j];
+                }
+                else{ // If gMat[i][j]<0
+                    ansMat[i][j] = gMat[i][j]*(-1);                   
                 }
             }
         } 
@@ -173,6 +176,9 @@ namespace ariel{
             for(size_t j=0; j<n; j++){
                 if(gMat[i][j]>0){
                     ansMat[i][j] = gMat[i][j]*(-1);
+                }
+                else{
+                    ansMat[i][j] = gMat[i][j];
                 }
             }
         } 
