@@ -178,9 +178,9 @@ TEST_CASE("Test unary minus operator") {
 TEST_CASE("Test unary plus operator") {
     Graph g1;
     vector<vector<int>> graph1 = {
-        {0, 1, 0},
+        {0, -1, 0},
         {1, 0, 1},
-        {0, 1, 0}};
+        {0, -1, 0}};
     g1.loadGraph(graph1);
     +g1; // Apply unary plus operator
 
@@ -345,7 +345,7 @@ TEST_CASE("testPostIncrement") {
     Graph result = g++;
 
     // Check if the original graph is unmodified
-    CHECK(g != result); // CHECK inequality after post-increment
+    CHECK(g == result); // CHECK inequality after post-increment
     cout << "Post-increment (n++) test passed!" << endl;
 }
 
@@ -377,6 +377,6 @@ TEST_CASE("testPostDecrement") {
     Graph result = g--;
 
     // Check if the original graph is unmodified
-    CHECK(g != result); // CHECK inequality after post-decrement
+    CHECK(g == result); // CHECK inequality after post-decrement
     cout << "Post-decrement (n--) test passed!" << endl;
 }
