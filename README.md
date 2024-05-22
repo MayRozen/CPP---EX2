@@ -10,6 +10,8 @@ Mail: mayrozen45@gmail.com
 כהמשך לכך, במקרים אלו, קלט הפונקציה הוא ה - reference של הגרף ולא העתק שלו.
 
 כעת נפרט על כל פונקציה:
+
+        אופרטורים חשבוניים
 בפונקציה זו ביצענו חיבור בין שני גרפים. כלומר, בין כל שתי צלעות הגרף בהתאם לקודקודיו. כל זאת בהתאם למטריצת השכנויות ממנה הגרף מורכב.
 
         friend Graph operator+(const Graph& g1, const Graph& g2); // plus operator
@@ -33,22 +35,70 @@ Mail: mayrozen45@gmail.com
 
         friend void operator-(Graph& g); // Unary minus operator
 
+        אופרטורי השוואה
+
+על מנת לבדוק האם גרף אחד גדול מגרף אחר עלינו לבדוק האם הגרף הראשון (הקטן יותר) מוכל בשני. אם אף גרף לא מוכל ממש בשני והגרפים לא שווים, נבדוק האם כמות הצלעות בגרף הגדול גדולה או שווה מכמות הצלעות בגרף השני. אם כן - נחזיר שגרף זה אכן גדול יותר
+
         friend bool operator>(Graph g1, Graph g2);
+
+אופרטור גדול שווה הבודק האם גרף 1 גדול או שווה לגרף 2.
+
         friend bool operator>=(Graph g1, Graph g2);
+
+אופרטור קטן.
+
         friend bool operator<(Graph g1, Graph g2);
+אופרטור קטן או שווה.
+
         friend bool operator<=(Graph g1, Graph g2);
+
+אופרטור שווה - בודק האם שני הגרפים זהים לחלוטין.
+
         friend bool operator==(const Graph& g1, const Graph& g2);
+
+אופרטור שונה - בודק האם הגרפים שונים.
+
         friend bool operator!=(const Graph& g1, const Graph& g2);
 
+        הגדלה ב-1 (++) והקטנה ב-1 (--) לפני ואחרי המספר
+
+על מנת לבצע הוספה לפני הגרף, נוכל פשוט לקחת את הגרף ולהעלות כל צלע בו (כל איבר במטריצת השכוניות) באחד.
+
         friend Graph& operator++(Graph &g); //++n
+
+על מנת לבצע הוספה לאחר הגרף, עלינו לבצע תחילה העתקה עמוקה לגרף (אותה ביצעתי על ידי בנאי מעתיק אשר מופיע בתחילת הקובץ Graph.hpp) ועליו לבצע את ההוספה. כמו כן, הגרף המועתק זה יהיה הגרף שיוחזר.
+
         friend const Graph operator++(Graph &g, int); // n++
+
+הקטנת כל איברי הגרף באחד לפני הגרף.
+
         friend Graph& operator--(Graph &g); //--n
+
+הקטנת כל איברי הגרף באחד אחרי הגרף - באופן זהה להוספה -> יתקיים בעזרת בנאי מעתיק והחזרת הגרף המועתק.
+
         friend const Graph operator--(Graph &g, int); // n--
 
+        הכפלה וחילוק בסקלר
+
+ביצוע הכפלת כל איבר מהגרף בסקלר c. זאת על ידי מעבר על מטריצת השכנויות של הגרף והכפלת כל ערך בקבוע c.
+
         friend void operator*(Graph& g, int c); // Multiplication by a scalar
+
+אופרטור מקוצר להכפלה בסקלר c.
+
         friend void operator*=(Graph &g, int c); // Multiply the graph by int
+
+אופרטור מקוצר לחילוק בסקלר c.
+
         friend void operator/=(Graph &g, int c); // Dividing the graph by int
 
+        הכפלה בין שני גרפים
+
+מתבצע על ידי הכפלה בין שתי המטריצות מהן כל אחד מהגרפים מורכב. נשים לב שאת התוצאה אנחנו מכניסים לתוך ה - reference של גרף 1.
+
         friend Graph operator*(const Graph& g1, const Graph& g2); // Graph Multiplication
+
+        אופרטור הדפסה
+אופרטור המאפשר הדפסה של הגרף על ידי >>.
 
         friend std::ostream& operator<<(std::ostream &os, const Graph& g); // Print Graph
