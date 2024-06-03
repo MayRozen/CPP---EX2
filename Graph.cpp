@@ -189,12 +189,12 @@ namespace ariel{
 
     //---------------------------Comparison Operators---------------------------
 
-    bool operator>(Graph g1, Graph g2) { // g1>g2
+    bool Graph::operator>(Graph g1) { // g1>g2
         bool ans = true;
         std::vector<std::vector<int>> g1Mat = g1.getAdjMatrix();
-        std::vector<std::vector<int>> g2Mat = g2.getAdjMatrix();
+        std::vector<std::vector<int>> g2Mat = this->getAdjMatrix();
         int n1 = g1.getNumVertices();
-        int n2 = g2.getNumVertices(); // The smaller graph
+        int n2 = this->getNumVertices(); // The smaller graph
 
         int numG1 = 0, numG2 = 0; // The amount of the edges
 
@@ -411,8 +411,3 @@ namespace ariel{
         return os;
     }
 }
-
-
-
-
-
