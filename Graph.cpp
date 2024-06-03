@@ -368,23 +368,20 @@ namespace ariel{
 
         // Check if matrices can be multiplied
         if (sizeG1 != sizeG2) {
-            std::cerr << "Matrices cannot be multiplied!" << std::endl;
+            std::cerr << "The number of columns in the first matrix must be equal to the number of rows in the second matrix." << std::endl;
             return ans; // empty graph
         }
 
         // Multiply matrices
         for (size_t i = 0; i < sizeG1; ++i) {
             for (size_t j = 0; j < sizeG2; ++j) {
-                if(i == j){
-                    ansMat[i][j] = 0;
-                }
-                else{
-                    for (size_t k = 0; k < sizeG1; ++k) {
-                        ansMat[i][j] += g1.getAdjMatrix()[i][k] * g2.getAdjMatrix()[k][j];
-                    }
+                ansMat[i][j] = 0; // Initialize the element to 0
+                for (size_t k = 0; k < sizeG1; ++k) {
+                    ansMat[i][j] += g1.getAdjMatrix()[i][k] * g2.getAdjMatrix()[k][j];
                 }
             }
         }
+
         ans.loadGraph(ansMat);
 
         return ans;
