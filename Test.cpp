@@ -285,9 +285,9 @@ TEST_CASE("Comparison operators between different graphs") {
 
     Graph g2;
     vector<vector<int>> graph2 = {
-        {1, 0, 0},
-        {0, 1, 0},
-        {0, 0, 1}};
+        {0, 0, 1},
+        {0, 0, 0},
+        {1, 0, 0}};
     g2.loadGraph(graph2);
 
     CHECK(g1 < g2); // Need to print: "Error! not equals weight"
