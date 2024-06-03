@@ -55,7 +55,7 @@ namespace ariel {
         friend void operator-=(Graph& g1, Graph& g2); // subtraction operator
         friend void operator-(Graph& g); // Unary minus operator
 
-        friend bool operator>(Graph g1, Graph g2);
+        bool operator>(Graph g1);
         friend bool operator>=(Graph g1, Graph g2);
         friend bool operator<(Graph g1, Graph g2);
         friend bool operator<=(Graph g1, Graph g2);
