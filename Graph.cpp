@@ -391,7 +391,7 @@ namespace ariel{
     }
 
 
-    //---------------------------Print Graph---------------------------
+    //---------------------------Graph Multiplication---------------------------
     std::ostream& operator<<(std::ostream &os, const Graph& g) {
         int n = g.getNumVertices();
 
@@ -403,7 +403,12 @@ namespace ariel{
                     std::cout<<",";
                 }
             }
-            std::cout<<"]";
+            if(i==n-1){
+                std::cout<<"]";
+            }
+            else{
+                std::cout<<"],";
+            }
         }
 
         return os;
