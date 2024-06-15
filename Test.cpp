@@ -120,7 +120,7 @@ TEST_CASE("Test settlement structure destructor") {
     cout<< "Test settlement structure destructor success!" <<endl;
 }
 
-// -----------------------------Structure-----------------------------
+// -----------------------------DevelopmentCard-----------------------------
 
 TEST_CASE("Development Card Type Tests") {
     SUBCASE("Monopoly Card Test") {
